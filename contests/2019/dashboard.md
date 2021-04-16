@@ -1,5 +1,5 @@
 ---
-layout: contests/base2019
+layout: contests/2019/base
 title: Dashboard
 edition: "2019"
 ---
