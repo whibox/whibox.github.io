@@ -1,0 +1,151 @@
+/* counters */
+
+body {
+    counter-reset: section;                    /* Set the section counter to 0 */
+}
+
+.with-counter h4::before {
+    display: inline;
+    counter-increment: section;
+    content: counter(section) ". ";
+    color: #337ab7;
+}
+
+/* scrollable contents */
+.scrollable{
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+.img-fluid {
+    max-width: 60%;
+}
+
+
+tbody td, tbody th {
+    vertical-align: middle !important;
+}
+
+/* tbody td.ellipsable { */
+/*     max-width: 120px; */
+/*     overflow: hidden; */
+/*     text-overflow: ellipsis; */
+/*     white-space: nowrap; */
+/* } */
+
+/* tbody td.nowrap { */
+/*     white-space: nowrap; */
+/* } */
+
+/* .table-responsive .row, .table-responsive .col-sm-12 { */
+/*     margin: 0px; */
+/*     padding: 0px; */
+/* } */
+
+/* .panel-big { */
+/*     font-size: 120%; */
+/* } */
+
+
+.alerts-container {
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .alerts-container {
+        top: 105px;
+        left: 15px;
+        right: 15px;
+    }
+}
+
+/* Custom notifications */
+/* Inspired by https://tympanus.net/codrops/2012/06/25/timed-notifications-with-css-animations */
+
+.alert {
+    width: 400px;
+    position: relative;
+    display: none;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 120%;
+}
+
+@media (max-width: 768px) {
+    .alert {
+        width: 100%;
+    }
+}
+
+.alert-active {
+    display: block;
+    animation: fadeInThenOut 4s ease-in-out forwards;
+}
+
+@keyframes fadeInThenOut {
+    0% { opacity: 0; }
+    1% { opacity: 0; transform: translateY(-30px);}
+    10% { opacity: 0.95; transform: translateY(0px);}
+    90% { opacity: 0.95; transform: translateY(0px);}
+    99% { opacity: 0; transform: translateY(-30px);}
+    100% { opacity: 0; }
+}
+
+/* .compiler { */
+/*     text-transform: uppercase */
+/* } */
+
+
+form.user .form-control-user {
+    font-size: 1rem;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+.sidebar .sidebar-brand {
+    text-transform: none;
+}
+
+.sidebar-brand img:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.bg-login-image{
+  background: url(/static/images/undraw_login.svg);
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+.bg-register-image{
+  background: url(/static/images/undraw_welcome.svg);
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+.fa-pulse {
+  animation-duration: 5s;
+}
