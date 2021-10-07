@@ -1,0 +1,17 @@
+#+TITLE: README
+
+
+* Setup development environment
+** Install Ruby and Jekyll
+See [[https://jekyllrb.com/docs/installation/][jekyll installation documentation]].
+Please don't forget to add *Ruby*, *bundle*, and *jekyll* in your =PATH=.
+** Install gems
+#+begin_src bash
+bundle install
+#+end_src
+* Local server
+You can serve the website locally by using
+#+begin_src bash
+jekyll serve
+#+end_src
+This is very useful for development because the local server will monitor the modification of source code and it will regenerate the site on-the-fly if any modificaiton is made.
