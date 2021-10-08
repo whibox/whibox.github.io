@@ -23,25 +23,14 @@ edition: "2021"
 <div class="row">
   <div class="col-12 mb-4">
 
-    {% if programs %}
     <div class="card shadow mb-2">
       <div class="card-header py-3">
         <h4 id="challenges" class="m-0 font-weight-bold text-primary">Challenges ranking by strawberry scores</h4>
       </div>
       <div class="card-body">
-        {% include 'table_challenges.html' %}
+        {% include table_challenges.html %}
       </div>
     </div>
-    {% else %}
-    <p class="lead">
-      There aren't any challenges submitted yet.
-      Be the first to submit one by clicking on the <mark>Submit a Challenge</mark> link in the menu bar.
-    </p>
-    <div class="text-center">
-      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-           src="../static/2021/images/undraw_uploading.svg" alt="">
-    </div>
-    {% endif %}
 
   </div>
 </div><!-- row -->
