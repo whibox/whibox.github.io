@@ -25,7 +25,7 @@
         <th class="text-center" scope="row">{{ program.strawberries_ranking }}</th>
         <td class="text-center">{{ program.id }}</td>
         <td class="text-center">
-          <div style="width: 1em; height: 1em; background-color: {{ program.hsl_color }}"></div>
+          <div style="width: 1em; height: 1em; background-color: hsl({{ program.datetime_submitted | modulo: 360 }}, 100%, {{ program.datetime_published | modulo: 47 | plus: 20 }}%)"></div>
         </td>
         <td class="text-center"><a href='/candidate/{{ program._id }}/source.c'>{{ program.funny_name }}</a></td>
         <td class="text-center">{{ program.strawberries_peak | round : 2 }} 🍓 </td>
@@ -78,7 +78,7 @@
         <td class="text-center">{{ program.datetime_published | date: "%Y-%m-%d %H:%M" }} UTC</td>
         <td class="text-center"><span class="text-danger">{{ program.datetime_first_break | date: "%Y-%m-%d %H:%M" }} UTC</span></td>
         <td class="text-center">
-          <span class="text-danger">{{ total_breaks_by_program[program._id] }}</span>
+          <span class="text-danger">{{ program.total_breaks }}</span>
         </td>
         <td class="text-center">0.00 🍓 </td>
       </tr>
