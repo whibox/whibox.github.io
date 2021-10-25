@@ -14,4 +14,4 @@ You can serve the website locally by using
 #+begin_src bash
 jekyll serve
 #+end_src
-This is very useful for development because the local server will monitor the modification of source code and it will regenerate the site on-the-fly if any modificaiton is made.
+This is very useful for development because the local server will monitor the modification of source code and it will regenerate the site on-the-fly if any modification is made.
