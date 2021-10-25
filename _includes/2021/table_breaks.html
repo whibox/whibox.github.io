@@ -13,7 +13,7 @@
       <th scope="row" class="text-center">{{ break.datetime_broken | date: "%Y-%m-%d %H:%M" }} UTC</th>
       <td class="text-center">{{ break.breaker }}</td>
       <td class="text-center">{{ break.strawberries | round : 2}} 🍓</td>
-      <td class="text-center"><a href='/candidate/{{ break.program._id }}/source.c'>{{ break.program }}</a> ({{ break.program.id }})</td>
+      <td class="text-center"><a href='candidate/{{ break.program_id }}/source.c'>{{ break.program }}</a> ({{ break.program_id }})</td>
     </tr>
     {% endfor %}
   </tbody>
