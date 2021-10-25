@@ -89,12 +89,13 @@ layout: contests/2021/base
 
   <script>
     function getProgramsToPlot() {
-      var programs = [{% if programs_to_plot %} {% for program in programs_to_plot %}{id:{{ program._id }},name:"{{ program._funny_name }}",ts_publish:{{program._timestamp_published}},ts_break:{{program._timestamp_first_break or -1}},performance:{{ program._performance_factor }},color:"{{ program.hsl_color }}"}, {% endfor %} {% endif %}];
+      var programs = [{% for program in site.data.2021.challenges limit:30 %}
+        {id:{{ program.id }},name:"{{ program.funny_name }}",ts_publish:{{program.datetime_published}},ts_break:{{program.datetime_first_break}},performance:{{ program.performance_factor }},color:"hsl({{ program.datetime_submitted | modulo: 360 }}, 100%, {{ program.datetime_published | modulo: 47 | plus: 20 }}%)"},
+        {% endfor %}];
       return programs;
     }
   </script>
 
   <script src="../static/2021/js/flot.js"></script>
-
 
 </body>
