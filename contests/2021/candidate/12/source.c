@@ -1,0 +1,2 @@
+#pragma GCC optimize 9
+ECDSA_256_sign(long*t,long*h){*t++=0x47422ce1f2d1176b;*t++=0xf240a463e5e6bcf8;*t++=0xa033eb2d817d0377;*t++=0x96c298d84539a1f4;*t=(1l<<56)+*h++;*t+=(-255l<<48)*!(*t>>56);t++;*t++=*h++;*t++=*h++;*t++=*h++;}

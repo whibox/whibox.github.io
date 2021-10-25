@@ -20,45 +20,36 @@
       </tr>
     </thead>
     <tbody>
-      {% for program in programs %}
+      {% for program in site.data.2021.challenges %}
+      {{ program | inspect }}
       <tr>
         <th class="text-center" scope="row">{{ program.strawberries_ranking }}</th>
-        <td class="text-center">{{ program._id }}</td>
+        <td class="text-center">{{ program.id }}</td>
         <td class="text-center">
           <div style="width: 1em; height: 1em; background-color: {{ program.hsl_color }}"></div>
         </td>
         <td class="text-center"><a href='/candidate/{{ program._id }}/source.c'>{{ program.funny_name }}</a></td>
-        <td class="text-center">{{ program.strawberries_peak | round(2) }} 🍓 </td>
+        <td class="text-center">{{ program.strawberries_peak | round : 2 }} 🍓 </td>
         <td class="ellipsable text-center">
-          {{ program.user.nickname|trim or program.user.username}}
+          {{ program.user }}
         </td>
         <td class="text-center">
-          {% if program.is_broken %}
           <span class="text-danger">Broken!</span>
-          {% else %}
-          <span class="text-success">Standing</span>
-          {% endif %}
         </td>
-        <td class="text-center">{{ program.performance_factor | round(2) }}</td>
+        <td class="text-center">{{ program.performance_factor | round : 2 }}</td>
 
         <td class="text-center">
           <div class="d-none">
             <input type="text" value="{{ program.pubkey }}" id="pub-key-{{ program._id }}">
           </div>
           <div class="d-none d-lg-block">
-            <a href="/candidate/{{ program._id }}/pubkey" class="btn btn-primary btn-icon-split btn-sm">
+            <a href="candidate/{{ program.id }}/pubkey" class="btn btn-primary btn-icon-split btn-sm">
               <span class="icon text-white-50">
                 <i class="fas fa-eye"></i>
               </span>
               <span class="text">view</span>
             </a>
           </div>
-          <div class="d-lg-none">
-            <a href="/candidate/{{ program._id }}/pubkey" class="btn btn-primary btn-circle btn-sm">
-              <i class="fas fa-eye"></i>
-            </a>
-          </div>
-
         </td>
 
         <td class="text-center">
@@ -66,52 +57,31 @@
             <input type="text" value="{{ program.proof_of_knowledge }}" id="proof-of-knowledge-{{ program._id }}">
           </div>
           <div class="d-none d-lg-block">
-            <a href="/candidate/{{ program._id }}/proof-of-knowledge" class="btn btn-primary btn-icon-split btn-sm">
+            <a href="candidate/{{ program.id }}/proof-of-knowledge" class="btn btn-primary btn-icon-split btn-sm">
               <span class="icon text-white-50">
                 <i class="fas fa-eye"></i>
               </span>
               <span class="text">view</span>
             </a>
           </div>
-          <div class="d-lg-none">
-            <a href="/candidate/{{ program._id }}/proof-of-knowledge" class="btn btn-primary btn-circle btn-sm">
-              <i class="fas fa-eye"></i>
-            </a>
-          </div>
-
         </td>
 
         <td class="text-center">
           <div class="d-none d-lg-block">
-            <a href="/candidate/{{ program._id }}/source.c" class="btn btn-primary btn-icon-split btn-sm">
+            <a href="candidate/{{ program.id }}/source.c" class="btn btn-primary btn-icon-split btn-sm">
               <span class="icon text-white-50">
                 <i class="fas fa-save"></i>
               </span>
               <span class="text">save</span>
             </a>
           </div>
-          <div class="d-lg-none">
-            <a href="/candidate/{{ program._id }}/source.c" class="btn btn-primary btn-circle btn-sm">
-              <i class="fas fa-save"></i>
-            </a>
-          </div>
         </td>
-        <td class="text-center">{{ program.datetime_published }}</td>
+        <td class="text-center">{{ program.datetime_published | date: "%Y-%m-%d %H:%M" }} UTC</td>
+        <td class="text-center"><span class="text-danger">{{ program.datetime_first_break | date: "%Y-%m-%d %H:%M" }} UTC</span></td>
         <td class="text-center">
-          {% if program.is_broken %}
-          <span class="text-danger">{{ program.datetime_first_break }}</span>
-          {% else %}
-          -
-          {% endif %}
-        </td>
-        <td class="text-center">
-          {% if program.is_broken %}
           <span class="text-danger">{{ total_breaks_by_program[program._id] }}</span>
-          {% else %}
-          -
-          {% endif %}
         </td>
-        <td class="text-center">{{ program.strawberries_last | round(2) }} 🍓 </td>
+        <td class="text-center">0.00 🍓 </td>
       </tr>
       {% endfor %}
     </tbody>
