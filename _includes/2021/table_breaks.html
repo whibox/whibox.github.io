@@ -1,0 +1,20 @@
+<table class="table table-striped table-bordered data-table table-hover {% if active_page == 'user_show' %} no-search no-paging no-info {% endif %}" style="width: 100%;">
+  <thead>
+    <tr>
+      <th class='column-to-sort-first text-center'>Date</th>
+      <th class="text-center">User</th>
+      <th data-type="fruit" class="text-center">Strawberries</th>
+      <th class="text-center">Challenge Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for break in site.data.2021.breaks %}
+    <tr>
+      <th scope="row" class="text-center">{{ break.datetime_broken | date: "%Y-%m-%d %H:%M" }} UTC</th>
+      <td class="text-center">{{ break.breaker }}</td>
+      <td class="text-center">{{ break.strawberries | round : 2}} 🍓</td>
+      <td class="text-center"><a href='/candidate/{{ break.program._id }}/source.c'>{{ break.program }}</a> ({{ break.program.id }})</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
