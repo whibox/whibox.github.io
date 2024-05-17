@@ -1,0 +1,630 @@
+---
+layout: contests/2024/base_decorated
+title: Competition Rules
+edition: "2024"
+---
+
+<div class="row with-counter">
+
+  <div class="col-12">
+    <p>The competition is run by the <span class="text-dark">ORGANIZING COMMITTEE</span>.</p>
+  </div>
+
+
+  <!-- Card User Account -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardAccount" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">User accounts</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardAccount">
+        <div class="card-body scrollable">
+          <p>
+            Anyone can create an account and post one or several challenges and/or break one or more challenges on the WhibOx Contest Edition 4 website.
+          </p>
+          <p>
+            The account owner may remain completely anonymous when creating an account.
+            In addition to creating a login/password, an email address must be entered (in case the <span class="text-dark">ORGANIZING COMMITTEE</span> needs to contact the owner directly).
+            However, the email address is not verified except for basic syntax.
+            Users may e.g. enter their primary email address or, if they are willing to remain anonymous, may use a free service such as <a href="https://www.mailinator.com">Mailinator</a> to create an untraceable email address.
+          </p>
+          <p>
+            The same person may create several accounts.
+            User accounts are password-protected but passwords <span class="text-danger">CANNOT BE CHANGED</span> and are <span class="text-danger">NOT RECOVERABLE</span> in case of loss.
+            It is the users' responsibility to choose a strong enough password and to keep it in a safe place.
+            Winners will be asked to log in and reveal their real name on the competition website if they want to be publicly awarded during the prize ceremony.
+          </p>
+          <!-- <p>
+               Every newly registered user, referred to as a contestant, is assigned a <span class="text-dark">BANANA</span> score initialized to 0.
+               </p> -->
+          <p>
+            The website is public in the sense that anyone can freely browse it (including downloading challenges) but logging in is required to post or break challenges.
+          </p>
+          <p>
+            The competition website is referred to as the <span class="text-dark">SYSTEM</span>. This is a cloud server instance with an Intel Xeon-E2136 CPU (6 cores / 12 threads @ 3.3 GHz/4.5 GHz) with 32GB of RAM.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card "What is a challenge" -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardChallenge" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">What is a challenge?</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardChallenge">
+        <div class="card-body scrollable">
+
+          <p>A challenge is a C source program that contains a function with prototype</p>
+          <pre>void ECDSA_256_sign(unsigned char sig[64], const unsigned char hash[32]);</pre>
+          <p>
+            It implements an ECDSA signature algorithm on the <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">NIST P-256 curve</a> under some private key embedded into the code.
+            The function <code>ECDSA_256_sign</code> takes two arguments:
+            <ul>
+              <li><code>hash</code> : a pointer to the 32-byte hash of the message to be signed (the hash function is excluded from the implementation),</li>
+              <li><code>sig</code> : the address for the output 64-byte signature.</li>
+            </ul>
+          </p>
+          <p>
+            The C language is the one accepted by GCC 13.2.1 with NO additional language dialect options.
+            The source code must be completely portable and re-compilable towards any target architecture.
+            In other words, it must be made only of generic C which in particular, excludes the use of inline assembly.
+            Note that there is no restriction to a 32-bit architecture as in the first edition of the WhibOx contest.
+            Native 64-bit operations are supported by default and contestants may use them as they see fit.
+          </p>
+          <p>
+            The source file is allowed to include the GMP library (version 6.3.0) through <code>#include &lt;gmp.h&gt;</code>.
+            Besides that, no <code>#include</code> or <code>extern</code> is allowed in the source code, and more generally linking to external libraries (even the standard C libraries) is forbidden.
+            Any attempt to maliciously attack the <span class="text-dark">SYSTEM</span> or the computer system of contestants will lead to <span class="text-danger">DISQUALIFICATION</span>.
+            In case evidence of malicious code is found in a challenge, contestants are invited to report the issue to the <span class="text-dark">ORGANIZING COMMITTEE</span> directly (whibox.organizing.committee@gmail.com).
+            If contestants are suspicious that some challenge program may contain malware, they may run GCC in docker or a virtual machine, exactly like the server does (using VirtualBox).
+          </p>
+          <p>
+            Documentation on how the server runs is found on <a href="https://github.com/CryptoExperts/whibox_contest_submission_server/tree/whibox2024">GitHub</a>.
+            Contestants are invited to download and install their own instance of the server if they want to ensure that their challenge will be accepted when submitted.
+          </p>
+          <p>
+            <strong>IPR and copyright disclaimer:</strong> contestants may indicate (typically in a header in their source) which license applies to their challenge program, if any.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card "Requirements on the source and executables" -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardRequirements" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Requirements on the source and executable</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardRequirements">
+        <div class="card-body scrollable">
+          <ul>
+            <li>The source code must be no bigger than <strong>100MB</strong>.</li>
+            <li>The <span class="text-dark">REFERENCE COMPILERS</span> must use at most <strong>800MB</strong> of RAM to complete compilation.</li>
+            <li>The compilation must not exceed <strong>150 seconds</strong>.</li>
+            <li>The executable must be <strong>50MB</strong> in size or less,</li>
+            <li>The executable must use <strong>50MB</strong> of RAM or less (this includes the stack and all global variables, at the exclusion of the code itself),</li>
+            <li>The executable must run in <strong>10 seconds</strong> or less per function call. This is not absolute time but CPU time, measured within a VirtualBox VM by the SYSTEM. Contestants may check that their challenges comply with this limitation by using the utility <code>ulimit</code> with the <code>&minus;t</code> option.</li>
+            <li>The following character strings are forbidden in the source code:
+              <ul>
+                <li><code>"#(wsp*)include"</code>, except <code>#include &lt;gmp.h&gt;</code></li>
+                <li><code>"extern"</code></li>
+                <li><code>"_FILE__"</code></li>
+                <li><code>"__DATE__"</code></li>
+                <li><code>"__TIME"</code></li>
+                <li><code>"__STDC_"</code></li>
+                <li><code>"__asm__"</code></li>
+                <li><code>"syscall"</code></li>
+                <li><code>".init"</code>, <code>".fini"</code>, <code>".init_array"</code>, <code>".fini_array"</code>, <code>".ctors"</code>, <code>".dtors"</code></li> 
+                <li><code>"(wsp)asm(nan)"</code></li>
+              </ul>
+              where <code>"(wsp)"</code> indicates a white space, <code>"(wsp*)"</code> indicates zero or more white spaces, and <code>"(nan)"</code> indicates any non-alphanumeric character.
+              An occurence of either of these strings will lead to a rejection of the challenge program, even if they are embedded in (arbitrarily nested) quoted strings. </li>
+            <li>The executable is <strong>not allowed</strong> to perform any system call beyond reading from <code>stdin</code>, writing to <code>stdout</code>, and performing allocations through <code>malloc</code> and <code>free</code> (which should be enough for using the <code>gmp</code> API). Any forbidden system call will kill the process as <code>SECCOMP</code> filters are used to enforce this. You can debug your program before submitting it using whatever system calls you want, but remember to remove the forbidden ones when submitting your challenge.
+The <code>SECCOMP</code> filters setup can be found <a href="https://github.com/whibox/whibox-contest-supplementary-materials">here</a> in the <code>main.c</code> file.
+            <li>The public key of the ECDSA implementation must not be one of the ones from the <a href=https://whibox.io/contests/2021/dashboard>previous 2021 edition</a> accepted candidates as they are <strong>blacklisted</strong>.
+          </ul>
+          <p>The <span class="text-dark">SYSTEM</span> will reject a program that does not comply with these requirements.</p>
+          <p>Compliance with the requirements can be tested by downloading and running a local instance of the submission server found <a href="https://github.com/CryptoExperts/whibox_contest_submission_server/tree/whibox2024">here</a>.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card "Auxiliary inputs" -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardAuxiliaryInputs" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Auxiliary inputs</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardAuxiliaryInputs">
+        <div class="card-body scrollable">
+          <p>
+            A challenge must come with
+            <ul>
+              <li>  the public key corresponding to the embedded private key,</li>
+              <li> a proof of knowledge of the private key.</li>
+            </ul>
+          </p>
+
+          <p>The public keys of the challenges accepted in the <a href=https://whibox.io/contests/2021/dashboard>previous 2021 edition</a> are <strong>blacklisted</strong> in order to avoid blind resubmissions.
+          <p>
+            The public key must be pasted into the appropriate field of the submission form as the 128-digit hexadecimal string encoding the 64-byte string \( \textsf{FE2OS}(x_Q) \parallel \textsf{FE2OS}(y_Q)\), where \( \textsf{FE2OS} \) is the "Field Element to Octet String" primitive defined in Section 3.1.3 of the <a href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03111/BSI-TR-03111_V-2-0_pdf.pdf?__blob=publicationFile&v=2">BSI ECC guideline</a>, \( (x_Q,y_Q) \) is the public key (\(x\)- and \(y\)-coordinates) and \( \parallel \) is the concatenation operator.
+          </p>
+
+          <p>
+            The proof of knowledge is a <a href="https://en.wikipedia.org/wiki/Schnorr_signature">Schnorr signature</a> of the empty message under the private key, that is a pair \( (r,s) \) such that \( \mathsf{SHA256}(s\cdot G+r\cdot  Q)=r \), where \( G \) is the base point and \( Q \) is the public key.
+            The input of \( \mathsf{SHA256} \) is the padded \(x\)-coordinate (32 bytes).
+            The format of the proof of knowledge is similar to that of the public key.
+            Namely, it is a 64-byte hexadecimal string obtained by concatenating \(r\) and \(s\) (each of them padded to 32 bytes).
+          </p>
+
+          <p>
+            A reference implementation with corresponding public key (formatted for submission) and a script to generate the proof of knowledge from the private key are available <a href="https://github.com/whibox/whibox-contest-supplementary-materials">here</a>.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card "Posting a challenge" -->
+  <div class="col-12">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardPosting" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Posting a challenge</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardPosting">
+        <div class="card-body scrollable">
+          <p>
+            A contestant who posts a new challenge must submit the corresponding public key to the <span class="text-dark">SYSTEM</span> for the purpose of verifying the consistency of the challenge program.
+            This is done as follows.
+          </p>
+          <p><strong>Challenge-key verification procedure</strong></p>
+          <ol>
+            <li>
+              The <span class="text-dark">SYSTEM</span> verifies that the submitted public key has not been previously submitted, and that it is one of the <a href=https://whibox.io/contests/2021/dashboard>previous 2021 edition</a> accepted candidates public keys. If this is the case, the challenge is rejected.
+            </li>
+            <li>
+              The <span class="text-dark">SYSTEM</span> verifies that the submitted public key is a valid public key by checking that the underlying elliptic point is on the curve P-256.
+              If not, the challenge is rejected.
+            </li>
+            <li>
+              The <span class="text-dark">SYSTEM</span> verifies the submitted proof of knowledge. If the verification fails, the challenge is rejected.
+            </li>
+            <li>
+              The <span class="text-dark">SYSTEM</span> compiles the challenge program and checks that it complies with the above requirements.
+              If not, the challenge is rejected.
+            </li>
+            <li>
+              The <span class="text-dark">SYSTEM</span> generates a number of random input hashes (32-byte strings), uses the submitted implementation of ECDSA P-256 to generate the corresponding signatures, and uses the submitted public key to verify these signatures.
+              The number of (input hash, signature) pairs is determined by the <span class="text-dark">SYSTEM</span> but is at least 100.
+            </li>
+            <li>
+              In case of mismatch, the procedure halts, the challenge program is rejected and the mismatching (input hash, signature) pair is returned to the submitting contestant.
+            </li>
+            <li>Finally, the challenge program is validated and:
+            <ol>
+              <li>given a name by the system,</li>
+              <li>assigned a <span class="text-dark">PERFORMANCE SCORE</span> (see below)</li>
+              <li>declared as <span class="text-dark">STANDING</span>,</li>
+              <li>assigned a <span class="text-dark">STRAWBERRY</span> score (both initialized to 0).</li>
+            </ol>
+            </li>
+          </ol>
+          <p><strong>Programmatic API access to input-output pairs</strong></p>
+          <p>
+            When accepted, the challenge is published on the website for anyone to download and play with.
+            In addition, a small subset of random hash-signature pairs is kept by the SYSTEM.
+            The number of pairs is determined by the <span class="text-dark">SYSTEM</span> but is at least 10.
+            These pairs can be recovered as a JSON object with the following HTTP request:
+          </p>
+          <p><code>GET https://{HOST}/candidate/{id}</code></p>
+          <p>where <code>{id}</code> is the integer identifier of the challenge (not its name). No authentication is required. Example output:</p>
+          <pre><code>{
+  "id": 3,
+  "proof_of_knowledge": "DA95FB593E561E3D24BA7C6AFFE28169EF17A76BCE9442E6EE1E768E5253E2844104C6513DD37DF82E7600018ACA5BC2AF467129DEF7903EDA693C0BBB76BD55",
+  "public_key": "7D333C24CE6E539C66E6C7EF159CC1FA75F1B36321D4E6F4E3C0B42294D927A0C77DCFDE5782CF5B82B18C3499575D5191950F56678AE4F7B11815FA19A66807",
+  "test_vectors": [
+    {
+      "hash": "CA432252911CB7D6984354F2C08B94850C013C4A7584C53E044D5AA840234A82",
+      "signature": "F946FA83BEBB4F1C31729175034A2971C1C8E9577DD7AB74DA476854157F459436A4C9EFE55DA6DC9E58B99777C6DD47F925C75B33A045F9F2E22DE7B26F6F24"
+    },
+    {
+      "hash": "E8720F0770A55ECF716B8E7E5EDFC7DE29A0D60D34FB22D999B6652F9EFC5092",
+      "signature": "EBDA369AABA4C9C1D234A089C9E8C4A5C58474B281FB03F87DDB796A8379604BAD85EFB1FFAAB2866F5F58BCA2B10F9837598C09EC46E739D78EBB5E0A0F05E7"
+    },
+    {
+      "hash": "0011F7845B3B0177A8FFA0B091EF6E18CBAC48B9CB1D094AA132D115B29A3C17",
+      "signature": "2DFCE93EF82D986F4D70D9A13DCAE09710251EBC410C5C9D40D2A58DB2072422AB5D507051B6E84C76D7EB0C9171663D17D0ADE206B06D5CA32C212BF7CA9202"
+    },
+    {
+      "hash": "74EE4AC38DAFE9E412A6BFD4B5C700D323647DF08E5D9CA6424FB9545AF8A921",
+      "signature": "4ACADB17EEA49231B8D418B4183F60108687A545C51329F8305C975CB0FA8BE745A668E46EA2667391044811C37C3B66E372DD7F85E026BCBCE5269E966153AD"
+    },
+    {
+      "hash": "635E98797C020703DF02401FC7875F6A898DAF6A97B44545085CEB7121DBF87C",
+      "signature": "936F5F1BB888D9767C85F35FD1E2D3B7E00B756CF1132CB3BC5D11E4F1FB9566DBB386D66EBBA03D08B8CCBCCFDCDEF9B347A3F0FA532FF863631517892631C7"
+    },
+    {
+      "hash": "6A80250B5D99AB19E7A22CD0C693DB5512171BA52F4CD6E5ED57D0F235BE5744",
+      "signature": "56C083E3EB85F6A7CEF35759717DC22CC3680A0347AC438462B58560D68EAA083E76468601FD86E4CB0AC3DCD72B76193193A91431ABB709F77106AB1E1004D6"
+    },
+    {
+      "hash": "C27A231D7FA08308DDFD708E1164885BC69126E6DEC7362388AF6E9AB5A9011F",
+      "signature": "15D5D181EE52D3946B720D4DBF6A1EF71D0A4DAB88B7D5339C1D74661029EB899624CF95A91163FCA4561091E780B7B677095EE3CF1F84FA268C6BEB299FADF4"
+    },
+    {
+      "hash": "50365D99155091C54E137CC3E7FB0B706BB0EFED921F690354F4AA08D783C94C",
+      "signature": "3F90C0F2912B52CEC781ADCF6E489B636549E543DBCE133D63B8B1B5E620291D5172A8A5BA844FB56E33C7D2324369DAF0BD29AC7FA0CDDD823EB9911577C71D"
+    },
+    {
+      "hash": "4E9A84C83082848926BF0B89E7D3585BE767C8657B4FFBAA9370C9839EC4D26E",
+      "signature": "5C6135E8BEDC689177CFE3AA25E6ED1EB8904DEB7E5967DDE901EAA3C5AE4A8D6A5C8BEB4A350E9A7828CCDC6904893CD16F2721D14320F9FE95C507F58B8B00"
+    },
+    {
+      "hash": "743E576BD584EEA6EDFE32CD3ECC3BB6C013258539CC31C653C31F7371E72A90",
+      "signature": "15A68010CF6EF4C2C29E9549D20532B4E86BECB18AA2C3338BCDE8081BF634F87FC5610E6978072CF8851ECBBF0377084E12B23130A8A2F84062C81B8227DFE7"
+    }
+  ]
+}
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card Performance -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardPerformance" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Performance scores</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardPerformance">
+        <div class="card-body scrollable">
+          <p>
+            The performance score of a challenge is measured by the <span class="text-dark">SYSTEM</span> when validating its consistency at posting time.
+            Challenges with a higher performance score collect <span class="text-dark">STRAWBERRY</span> points faster.
+            The score is assigned as follows.
+          </p>
+          <p>
+            <strong>Execution time.</strong>
+            The <span class="text-dark">SYSTEM</span> measures the average CPU time consumed by the challenge program and determines the fraction
+            \[f_{\text{time}} = \frac{\text{average time}}{ 10 \text{ seconds} }\;.\]
+          </p>
+          <p>
+            <strong>Code size.</strong>
+            The <span class="text-dark">SYSTEM</span> measures the size of the executable and determines the fraction
+            \[f_{\text{size}} = \frac{\text{code size}}{ 50 \text{ MB} }\;.\]
+          </p>
+          <p>
+            <strong>RAM usage.</strong>
+            The <span class="text-dark">SYSTEM</span> measures the average RAM consumption of the executable and determines the fraction
+            \[f_{\text{memory}} = \frac{\text{average RAM}}{ 50 \text{ MB} }\;.\]
+          </p>
+          <p>
+            The performance score of the challenge is evaluated as
+            \[\mathtt{perf\_score} = \log_2 \left(\frac{2}{f_{\text{time}} \cdot f_{\text{size}} \cdot f_{\text{memory}}}\right)\;.\]
+          </p>
+          <p>
+            Note that the performance score of a challenge that meets the allowed maximal limits is equal to \(1\).
+            Challenges that are either smaller, faster or less memory-consuming get a higher perfomance score.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card Strawberry -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardStrawberry" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Winning strawberries</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardStrawberry">
+        <div class="card-body scrollable">
+          <p>A contestant may post challenges anytime between the <span class="text-dark">STARTING DATE</span> and the <span class="text-dark">POSTING DEADLINE</span>.</p>
+          <p>
+            A challenge gets more and more <span class="text-dark">STRAWBERRIES</span> as time goes by, as long as it is not <span class="text-dark">BROKEN</span>.
+            In this third edition of the competition, time has a granularity of 1 minute instead of 1 day.
+          </p>
+          <p>
+            At the time \(t_{post}\) the challenge is posted, its <span class="text-dark">STRAWBERRY</span> score is set to \(0\).
+            The <span class="text-dark">STRAWBERRY</span> score then increases quadratically with time as
+            \[\mathtt{strawberries} = \mathtt{perf\_score} \times \left(\frac{t-t_{post}}{24\cdot 60}\right)^2\]
+            where \(t-t_{post}\) is the number of minutes elapsed since the challenge was posted and \(\mathit{perf\_score}\in[1,+\infty)\) is its performance score (see above).
+          </p>
+          <p>
+            If the challenge is BROKEN for the first time at time \(t_{break}\), its <span class="text-dark">STRAWBERRY</span> score becomes
+            \[\mathtt{strawberries} = \mathtt{perf\_score} \times \left(\frac{t_{break}-t_{post}-\left(t - t_{break}\right)}{24\cdot 60}\right)^2 \;,\]
+            meaning that its progression is reversed symmetrically until it reaches \(0\).
+            It then sticks to it.
+          </p>
+          <p>
+            When the <span class="text-dark">FINAL DEADLINE</span> is reached, the <span class="text-dark">STRAWBERRY</span> scores of all challenges freeze.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card Breaking -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardBreaking" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Breaking challenges</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardBreaking">
+        <div class="card-body scrollable">
+          <p>
+            A contestant may <span class="text-dark">BREAK</span> any challenge by submitting a candidate key to the <span class="text-dark">SYSTEM</span>.
+            The challenge may be <span class="text-dark">STANDING</span>, or already <span class="text-dark">BROKEN</span>.
+          </p>
+          <p>
+            <strong>Key verification procedure:</strong>
+            Given the submitted key, the <span class="text-dark">SYSTEM</span>
+            <ol>
+              <li>
+                generates the public key corresponding to the submitted private key,
+              </li>
+              <li>
+                fetches the public key of the target challenge,
+              </li>
+              <li>
+                3. verifies that the two public keys match.
+              </li>
+            </ol>
+            The submitted private key is erased as soon as the verification is completed.
+          </p>
+          <p>
+            In case of mismatch, the break is rejected.
+            Otherwise, the submitting contestant is notified that the break is accepted.
+            If the challenge was <span class="text-dark">STANDING</span>, it is declared as <span class="text-dark">BROKEN</span> at the time the <span class="text-dark">SYSTEM</span> accepted the break.
+          </p>
+          <p>Contestants may <span class="text-dark">BREAK</span> challenges until the <span class="text-dark">FINAL DEADLINE</span>.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card bananas -->
+  <div class="col-md-12 col-lg-6">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardBanana" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Winning bananas</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardBanana">
+        <div class="card-body scrollable">
+          <p>
+            Every newly registered user, referred to as a contestant, is assigned a <span class="text-dark">BANANA</span> score initialized to 0.
+          </p>
+          <p>
+            A contestant whose <span class="text-dark">BREAK</span> has been accepted by the <span class="text-dark">SYSTEM</span> gets a chance to increase their <span class="text-dark">BANANA</span> score.
+            Noting \(\mathtt{strawberries}\) the current <span class="text-dark">STRAWBERRY</span> score of the challenge and \(\mathtt{bananas}\) the contestant's current <span class="text-dark">BANANA</span> score, \(\mathtt{bananas}\) is updated as
+            \[\mathtt{bananas} = \max(\mathtt{bananas}, \mathtt{strawberries})\;.\]
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card Win Contest -->
+  <div class="col-12">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardWinContest" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Winning the competition</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardWinContest">
+        <div class="card-body scrollable">
+          <p>
+            The winners are determined at the time of the <span class="text-dark">FINAL DEADLINE</span>.
+            There are 2 winners, the <span class="text-dark">STRAWBERRY WINNER</span> and the <span class="text-dark">BANANA WINNER</span>.
+          </p>
+          <h5 class="text-primary">The strawberry winner</h5>
+          <p>
+            The <span class="text-dark">WINNING CHALLENGE</span> is the challenge (<span class="text-dark">STANDING</span> or <span class="text-dark">BROKEN</span>) which, by <span class="text-dark">STRAWBERRY</span> score, has reached the highest peak between the <span class="text-dark">STARTING DATE</span> and the <span class="text-dark">FINAL DEADLINE</span>.
+          </p>
+          <p>
+            The <span class="text-dark">STRAWBERRY WINNER</span> is the contestant who posted the <span class="text-dark">WINNING CHALLENGE</span>.
+          </p>
+          <h5 class="text-primary">The banana winner</h5>
+          <p>
+            The <span class="text-dark">BANANA WINNER</span> is the contestant with the highest <span class="text-dark">BANANA</span> score at the time of the <span class="text-dark">FINAL DEADLINE</span>.
+          </p>
+
+          <h5 class="text-primary">Cash prizes</h5>
+          <p>A 2000$ cash prize will be shared between the winners, as follows:</p>
+          <ul>
+            <li>
+              Designers' podium:
+              <ul>
+                <li>600$ for the strawberry winner</li>
+                <li>300$ for the second highest strawberry score</li>
+                <li>100$ for the third highest strawberry score</li>
+              </ul>
+            </li>
+            <li>
+              Attackers' podium:
+              <ul>
+                <li>600$ for the banana winner</li>
+                <li>300$ for the second highest banana score</li>
+                <li>100$ for the third highest banana score</li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Card disqualification -->
+  <div class="col-12">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardDisqualification" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Disqualification</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardDisqualification">
+        <div class="card-body scrollable">
+          <p>
+            At any time, the <span class="text-dark">ORGANIZING COMMITTEE</span> may <span class="text-dark">DISQUALIFY</span> a contestant in case of misconduct during the competition.
+            Examples of misconduct include
+          </p>
+          <ul>
+            <li>posting a challenge program that does not produce a verifiable ECDSA signature on P-256 curve with probablity 1,</li>
+            <li>posting a challenge program that contains malware,</li>
+            <li>attempting to attack/hack the SYSTEM or the computer system of contestants in any manner.</li>
+          </ul>
+          <p>
+            The user account of a <span class="text-dark">DISQUALIFIED</span> contestant is disabled and challenges that the contestant has posted may be withdrawn from the competition on a case-by-case basis.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card Terms -->
+  <div class="col-12">
+
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#cardTerms" class="d-block card-header py-3" data-toggle="collapse"
+         role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h4 class="m-0 font-weight-bold text-primary">Terms of reference</h4>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="cardTerms">
+        <div class="card-body">
+          <h5 class="text-primary">Important dates</h3>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr><td class="text-dark">STARTING DATE</td><td>May 26, 2024 @ 23:59 AoE (May 27, 2024 @ 11:59 UTC)</td></tr>
+                  <tr><td class="text-dark">POSTING DEADLINE</td><td>August 08, 2024 @ 23:59 AoE (August 09, 2024 @ 11:59 UTC)</td></tr>
+                  <tr><td class="text-dark">FINAL DEADLINE</td><td>September 01, 2024 @ 23:59 AoE (September 02, 2024 @ 11:59 UTC)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h5 class="text-primary">System and challenges</h5>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr><td class="text-dark">SYSTEM</td><td>Server comprising the competition website and tools for compiling and testing challenge programs. The compilation environment is fully described in <a href="https://github.com/CryptoExperts/wb_contest_submission_server/blob/whibox2024/services/compile_and_test/Dockerfile">this dockerfile</a>.</td></tr>
+                  <tr>
+                    <td class="text-dark">REFERENCE COMPILER</td>
+                    <td><code>gcc</code> version 13.2.1</td>
+                  </tr>
+                  <tr><td class="text-dark">REFERENCE IMPLEMENTATION</td><td><code>dECDSA.c</code> file available from <a href="https://github.com/whibox/whibox-contest-supplementary-materials">this GitHub repository</a>.</td></tr>
+                  <tr>
+                    <td><span class="text-dark">BROKEN</span> (challenge)</td>
+                    <td> At least one contestant has been able to provide the <span class="text-dark">SYSTEM</span> with the private ECDSA key that passes the key verification procedure.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="text-dark">STANDING</span> (challenge)</td>
+                    <td>A challenge that is not <span class="text-dark">BROKEN</span>.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h5 class="text-primary">Winning contestants</h5>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr>
+                    <td class="text-dark">WINNING CHALLENGE</td>
+                    <td>
+                      Challenge which <span class="text-dark">STRAWBERRY</span> score has reached the highest peak between the <span class="text-dark">STARTING DATE</span> and the <span class="text-dark">FINAL DEADLINE</span>.
+                    </td>
+                  </tr>
+                  <tr><td class="text-dark">STRAWBERRY WINNER</td><td>Contestant who posted the <span class="text-dark">WINNING CHALLENGE</span>.</td></tr>
+                  <tr>
+                    <td class="text-dark">BANANA WINNER</td>
+                    <td>Contestant with the highest <span class="text-dark">BANANA</span> score at the time of the <span class="text-dark">FINAL DEADLINE</span>. </td>
+                  </tr>
+                  <tr><td class="text-dark">STRAWBERRY</td><td>🍓</td></tr>
+                  <tr><td class="text-dark">BANANA</td><td>🍌</td></tr>
+                  <tr><td><span class="text-dark">DISQUALIFIED</span> (contestant)</td><td> Misconducting contestant excluded from the competition and whose challenges may be withdrawn.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <h5 class="text-primary">Organizing committee</h5>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr><td><strong>Email</strong></td><td>whibox.organizing.committee@gmail.com</td></tr>
+                  <tr><td><strong>Twitter</strong></td><td>@WhiboxC (WhibOx Contest Organizing Committee)</td></tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- .row -->
