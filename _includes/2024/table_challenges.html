@@ -27,7 +27,7 @@
         <td class="text-center">
           <div style="width: 1em; height: 1em; background-color: hsl({{ program.datetime_submitted | modulo: 360 }}, 100%, {{ program.datetime_published | modulo: 47 | plus: 20 }}%)"></div>
         </td>
-        <td class="text-center"><a href='/candidate/{{ program.id }}/source.c'>{{ program.funny_name }}</a></td>
+        <td class="text-center"><a href='candidate/{{ program.id }}/source.c'>{{ program.funny_name }}</a></td>
         <td class="text-center">{{ program.strawberries_peak | round : 2 }} 🍓 </td>
         <td class="ellipsable text-center">
           {{ program.user }}
