@@ -50,8 +50,6 @@ layout: contests/2024/base
   </div>
   <!-- End of Page Wrapper -->
 
-  {% include 2024/js.html %}
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -77,6 +75,34 @@ layout: contests/2024/base
     </div>
   </div>
 
-  <!-- TODO: copy here js plotting code from 2021 after finishing -->
+  {% include 2024/js.html %}
+
+  <!-- Plotting -->
+  <script src="../static/2021/js/jquery.flot.js"></script>
+  <script src="../static/2021/js/jquery.flot.resize.js"></script>
+  <script src="../static/2021/js/jquery.flot.time.js"></script>
+
+  <!-- dataTable -->
+  <script src="../static/2021/js/jquery.dataTables.min.js"></script>
+  <script src="../static/2021/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../static/2021/js/data-table.js"></script>
+
+  <script>
+   function getProgramsToPlot() {
+     var programs = [ {id:62,name:"objective_goldberg",ts_publish:1722949291,ts_break:1723371437,performance:9.3865082609,color:"hsl(279, 100%, 46%)"}, {id:87,name:"eager_euler",ts_publish:1723050919,ts_break:1723473523,performance:9.1149013767,color:"hsl(275, 100%, 60%)"}, {id:107,name:"sad_einstein",ts_publish:1723204523,ts_break:1723534026,performance:11.0140330925,color:"hsl(261, 100%, 21%)"}, {id:105,name:"trusting_mestorf",ts_publish:1723129457,ts_break:1723307247,performance:11.4290238448,color:"hsl(96, 100%, 61%)"}, {id:98,name:"adoring_kowalevski",ts_publish:1723108849,ts_break:1723275709,performance:12.9686294066,color:"hsl(40, 100%, 39%)"}, {id:61,name:"nostalgic_noether",ts_publish:1722949196,ts_break:1723176401,performance:4.3860955297,color:"hsl(166, 100%, 45%)"}, {id:81,name:"confident_benz",ts_publish:1723033680,ts_break:1723171164,performance:10.7351345923,color:"hsl(80, 100%, 23%)"}, {id:93,name:"brave_swanson",ts_publish:1723059554,ts_break:1723239019,performance:6.2068872260,color:"hsl(350, 100%, 47%)"}, {id:49,name:"elastic_bell",ts_publish:1722261770,ts_break:1722393482,performance:11.0873680344,color:"hsl(290, 100%, 41%)"}, {id:47,name:"peaceful_williams",ts_publish:1721482038,ts_break:1721639752,performance:7.7341773783,color:"hsl(220, 100%, 39%)"}, {id:73,name:"heuristic_nobel",ts_publish:1722961038,ts_break:1723130587,performance:6.6603113236,color:"hsl(2, 100%, 43%)"}, {id:71,name:"sharp_wright",ts_publish:1722960691,ts_break:1723102310,performance:9.4780799134,color:"hsl(84, 100%, 25%)"}, {id:106,name:"xenodochial_northcutt",ts_publish:1723189744,ts_break:1723323687,performance:9.7173496681,color:"hsl(288, 100%, 47%)"}, {id:104,name:"angry_meninsky",ts_publish:1723122597,ts_break:1723205938,performance:20.7703040430,color:"hsl(165, 100%, 63%)"}, {id:42,name:"practical_franklin",ts_publish:1721167890,ts_break:1721292935,performance:8.9831415377,color:"hsl(205, 100%, 39%)"}, {id:21,name:"elated_hodgkin",ts_publish:1720390316,ts_break:1720507574,performance:10.2120225951,color:"hsl(69, 100%, 33%)"}, {id:24,name:"lucid_roentgen",ts_publish:1720391538,ts_break:1720506745,performance:10.5668235650,color:"hsl(156, 100%, 33%)"}, {id:25,name:"jovial_wiles",ts_publish:1720391688,ts_break:1720504557,performance:10.9925075561,color:"hsl(223, 100%, 42%)"}, {id:23,name:"upbeat_bose",ts_publish:1720391371,ts_break:1720508016,performance:10.2336681238,color:"hsl(66, 100%, 54%)"}, {id:26,name:"distracted_leavitt",ts_publish:1720391923,ts_break:1720508062,performance:10.1686124458,color:"hsl(282, 100%, 42%)"}, {id:41,name:"nifty_heisenberg",ts_publish:1721167546,ts_break:1721292985,performance:8.2447684032,color:"hsl(159, 100%, 24%)"}, {id:74,name:"bright_lumiere",ts_publish:1722961177,ts_break:1723050222,performance:16.3335366741,color:"hsl(329, 100%, 41%)"}, {id:37,name:"musing_brown",ts_publish:1720641730,ts_break:1720734565,performance:14.3291246015,color:"hsl(346, 100%, 44%)"}, {id:22,name:"serene_aryabhata",ts_publish:1720391160,ts_break:1720508116,performance:8.8294710100,color:"hsl(2, 100%, 31%)"}, {id:56,name:"gallant_payne",ts_publish:1722711498,ts_break:1722798711,performance:14.5473664288,color:"hsl(350, 100%, 26%)"}, {id:102,name:"blissful_fermi",ts_publish:1723120245,ts_break:1723208614,performance:13.7513313607,color:"hsl(246, 100%, 61%)"}, {id:101,name:"vibrant_morse",ts_publish:1723119745,ts_break:1723208638,performance:10.9406759308,color:"hsl(96, 100%, 31%)"}, {id:29,name:"gifted_montalcini",ts_publish:1720474948,ts_break:1720526771,performance:7.7144686417,color:"hsl(38, 100%, 65%)"}, {id:43,name:"romantic_visvesvaraya",ts_publish:1721335175,ts_break:1721380455,performance:7.8765167480,color:"hsl(256, 100%, 51%)"}, {id:46,name:"dazzling_panini",ts_publish:1721425566,ts_break:1721454616,performance:17.9222946582,color:"hsl(134, 100%, 61%)"},  ];
+     return programs;
+   }
+   function getStartingDate() {
+     var starting_date = "2024-05-27T11:59:00Z";
+     return starting_date;
+   }
+   function getFinalDeadline() {
+     var final_deadline = "2024-09-02T11:59:00Z";
+     return final_deadline;
+   }
+  </script>
+
+
+  <script src="../static/2024/js/flot.js"></script>
 
 </body>
