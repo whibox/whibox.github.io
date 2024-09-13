@@ -27,7 +27,7 @@
         <td class="text-center">
           <div style="width: 1em; height: 1em; background-color: hsl({{ program.datetime_submitted | modulo: 360 }}, 100%, {{ program.datetime_published | modulo: 47 | plus: 20 }}%)"></div>
         </td>
-        <td class="text-center"><a href='/candidate/{{ program._id }}/source.c'>{{ program.funny_name }}</a></td>
+        <td class="text-center"><a href='/candidate/{{ program.id }}/source.c'>{{ program.funny_name }}</a></td>
         <td class="text-center">{{ program.strawberries_peak | round : 2 }} 🍓 </td>
         <td class="ellipsable text-center">
           {{ program.user }}
@@ -39,7 +39,7 @@
 
         <td class="text-center">
           <div class="d-none">
-            <input type="text" value="{{ program.pubkey }}" id="pub-key-{{ program._id }}">
+            <input type="text" value="{{ program.pubkey }}" id="pub-key-{{ program.id }}">
           </div>
           <div class="d-none d-lg-block">
             <a href="candidate/{{ program.id }}/pubkey" class="btn btn-primary btn-icon-split btn-sm">
@@ -53,7 +53,7 @@
 
         <td class="text-center">
           <div class="d-none">
-            <input type="text" value="{{ program.proof_of_knowledge }}" id="proof-of-knowledge-{{ program._id }}">
+            <input type="text" value="{{ program.proof_of_knowledge }}" id="proof-of-knowledge-{{ program.id }}">
           </div>
           <div class="d-none d-lg-block">
             <a href="candidate/{{ program.id }}/proof-of-knowledge" class="btn btn-primary btn-icon-split btn-sm">
